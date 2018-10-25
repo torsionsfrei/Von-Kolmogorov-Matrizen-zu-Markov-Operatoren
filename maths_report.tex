@@ -1,0 +1,94 @@
+\usepackage{amsfonts,amssymb,amsmath,latexsym,amsthm,ifthen}
+\usepackage{titlesec}
+\usepackage[left=3.1cm,right=3.1cm,top=1.2cm,bottom=1.2cm,includeheadfoot]{geometry}
+
+\theoremstyle{plain}
+\newtheorem{satz}{Satz}[section]
+
+% #### Gesonderte Einstellungen für Überschriften ####
+\titleformat{\chapter}
+ [display]
+ {\centering\scshape}
+ {\vspace{-40px}\large\textsc{Kapitel \thechapter}}
+ {0em}
+ {\LARGE}
+ [\vspace{-20px}]
+ \titleformat{\section}
+ [hang]
+ {\centering\scshape}
+ {\Large\thesection}
+ {0.5em}
+ {\Large}
+ []
+ \titlespacing*{\section}{0px}{25px}{15px}
+
+% #### Kopf- und Fußzeile ####
+%\renewcommand{\chaptername}{}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[L]{
+    \small
+    \ifthenelse{\isodd{\value{page}}}
+    {
+      \ifthenelse{\isundefined{\vorl}}
+      {~}
+      {\fbox{Vorläufige Version!}}
+    }
+    {\thepage}
+  }
+  \fancyhead[R]{
+    \small
+    \ifthenelse{\isodd{\value{page}}}
+    {\thepage}
+    {
+      \ifthenelse{\isundefined{\vorl}}
+      {~}
+      {\fbox{Vorläufige Version!}}
+    }
+  }
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{
+  \small
+  \ifthenelse{\isodd{\value{page}}}
+  {
+    \ifthenelse{\isundefined{\vorl}}
+    {~}
+    {\fbox{Vorläufige Version!}}
+  }
+  {\thepage}
+}
+\fancyhead[R]{
+  \small
+  \ifthenelse{\isodd{\value{page}}}
+  {\thepage}
+  {
+    \ifthenelse{\isundefined{\vorl}}
+    {~}
+    {\fbox{Vorläufige Version!}}
+  }
+}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+
+\newcommand{\Titelblatt}[3]{
+  \begin{titlepage}
+    ~\vspace{180px}
+    \begin{center}
+      \huge\textsc{#1}\vspace{10px}\\
+      \Large{#2}\vspace{20px}\\
+      \large{von \textsc{Erma Kurtagic, Jörg Schwartz}}\vspace{350px}\\
+      \small Tübingen, der \today
+      \normalsize
+    \end{center}
+  \end{titlepage}
+}
+
+% Der muss bald eliminiert werden !
+\newcommand{\Aufg}{\newpage~\vspace{-5px}\begin{center}\textsc{Aufgaben zu Abschnitt \thesection}\vspace{-10px}\\~\end{center}}

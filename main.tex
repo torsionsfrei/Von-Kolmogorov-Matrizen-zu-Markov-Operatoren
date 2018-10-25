@@ -1,0 +1,97 @@
+% !TEX encoding =  UTF-8 Unicode
+
+% Beginn
+\documentclass[a4paper]{paper}
+
+% Festlegungen dieser Datei
+\newcommand{\Autor}{Jörg Schwartz}
+\newcommand{\Titel}{Seminar Operatorentheorie: Kolmogorov Matrizen und Markov Operatoren WS 16/17}
+
+% Eingabe, Encoding und Sprache
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage[T1]{fontenc}
+
+
+% Verschiedene Pakete und Verlinkungen
+\usepackage{a4,fancyhdr,paralist,setspace,makeidx,german,lmodern,multicol}
+\usepackage[colorlinks=true,
+urlcolor=black,
+linkcolor=black,
+citecolor=black,
+filecolor=black,
+breaklinks=true,
+pdftitle={\Titel},
+pdfauthor={\Autor},
+]{hyperref}
+\usepackage{idxlayout}
+\usepackage{mdframed}
+
+
+% Mathematik-Layout
+\input{maths_report}
+\input{maths_main}
+
+\begin{document}
+
+% Kopf- und Fußzeile
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\textsc{Seminar der Operatorentheorie, Prof. R. Nagel}}
+\fancyhead[R]{\footnotesize\textsc{Universität Tübingen, WS 16/17}}
+\fancyfoot[L]{\footnotesize Jörg Schwartz}
+\fancyfoot[R]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\setcounter{section}{1}
+\vspace{-50px}
+
+\begin{center}
+\large\textsc{Von Kolmogorov Matrizen zu Markov Operatoren}
+\end{center}
+\textbf{DNS} ist ein Molekül, welches das \textbf{genetische Material} in Organismen mittels einer Folge von \textbf{Nukleotide} kodiert. Als \textbf{Gen} bezeichnet man den Abschnitt einer DNS, welcher die Information zur Konstruktion eines bestimmten \textbf{Proteins} enthält. Die physische Position eines Gens  wird \textbf{Locus} genannt, die Variante eines Gens an einem Locus heißt  \textbf{Allele}.\par Die verschiedenen Allele eines spezifischen Locus lassen sich durch Nummerierung mit einer Teilmenge $\mathbb I\subseteq \N$ identifizieren. Die \textbf{Wahrscheinlichkeit} $p_i(t)$, mit der ein  Locus zu einem Zeitpunkt $t\geq 0$ die Allele $i\in\I$ trägt, lässt sich mithilfe von   \textbf{Zufallsvariablen} $X_t, t\geq0$ vermöge $p_i(t)=\P(X_t=i)$ modellieren. Dabei gilt $\sum_{i\in\I}p_i(t)=1$, d.h. $(p_i(t))_{i\in\I}$ ist eine \textbf{Verteilung}.
+
+\par Die \textbf{Übergangswahrscheinlichkeit} $p_{i,j}(t,s)$ zweier Allele $i,j\in\I$ ist gegeben  durch die \textbf{bedingten Wahrscheinlichkeit} $p_{i,j}(t,s)=\P(X_t=j|X_s=i)$. Damit ist $(p_{ij}(t,s))_{i,j\in\I}$ \textbf{stochastische Matrix},  d.h. jede Zeile ist eine Verteilung. Der  $j$-te Eintrag einer Verteilung $y(t)=(p_i(t))_{i\in\I}$ bedingt auf die Verteilung $p_i(s)$ mit $t\geq s$ ist gegeben durch $p_j(t)=\P(X_t=j)=\sum_{i\in\I}p_i(s) p_{ij}(t,s)$. Damit definiert $P\colon \ell^1\to\ell^1, x\mapsto x\cdot(p_{ij}(t,s))_{i,j\in\I}=:Px$ eine linearen Operator mit $\|P\|=1$.
+\par Die Familie $(X_t)_{t\geq0}$, welche die Verteilung der Allele eines Locus modelliert, ist Beispiel einer \textbf{zeitlich homogenen Markovkette} (ZHMK) - ein Prozess \textbf{ohne Erinnerung} - mit $p_{ij}(t+h,s+h)=p_{ij}(t,s)$ für alle $h>0$. Es genügt also, lediglich $p_{ij}(t):=p_{ij}(t,0)$ zu betrachten.
+
+
+\begin{defi}
+\begin{compactenum}
+\item  Ein linearer Operator $P$ auf $\ell^1$ heißt   \textit{sub-Markov'sch}, falls $P(D)\subseteq D$ mit $D=\{x=(\xi_i)_{i\in\I}\in \ell^1; \xi_i\geq0, \|x\|\leq1\}$. Ist $\|x\|=1$ für alle $x\in D$, so heißt $P$ \textit{Markov'sch}.
+\item Eine Matrix $Q=(q_{ij})_{i,j\in\I}$ heißt \textit{Kolmogorov Matrix}, wenn für alle Einträge $q_{ij}$ gilt, dass  $0\leq -q_{ii}< \infty$ und $q_{ij}\geq0$ für $i\neq j$ mit  $\sum_{j\in\I}q_{ij}=0$ für jede Zeile $i\in\I$.
+\end{compactenum}
+\end{defi}
+
+\begin{prop} Sei  $(X_t)_{t\geq0}$  ZHMK mit Zustandsraum $\I\subseteq \N$ und Übergangswahrscheinlichkeiten $p_{i,j}(t)$. Dann ist $P(t)=(p_{ij}(t))_{i,j\in\I}$ für alle $t\geq0$  ein Markov Operator. Gilt $\lim_{t\downarrow 0}p_{i,i}(t)=1$ für alle  $i\in\I$, dann ist $(P(t))_{t\geq0}$  stark stetige Halbgruppe von Markov Operatoren. Dabei gilt:
+\begin{compactenum}
+   \item Für $\I$ endlich ist  $Q:=\lim_{h\downarrow 0}\frac{1}{h}\big(P(h)-I\big)$ eine Kolmogorov Matrix.
+   \item Für $\I$ nicht endlich ist  $Qx:=\lim_{h\downarrow0}\frac{1}{h}\big(P(h)x-x\big)$ mit $x\in D(Q)$  \textit{Generator}.
+   \end{compactenum}
+\end{prop}
+
+\begin{fsatz}[Hille-Yosida] Ein abgeschlossener, dicht definierter Operator $(Q, D(Q))$ ist Generator einer stark stetigen Halbgruppe von (sub-)Markov Operatoren genau dann, wenn:
+  \begin{compactenum}
+      \item Für alle $x\in \ell^1$ und $\lambda>0$ gibt es genau eine Lösung $y\in D(Q)$ mit $\lambda y- Qy = x$. 
+      \item Für alle $\lambda>0$ ist die Resolventenabbildung  $\lambda (\lambda-Q)^{-1}$ (sub-)Markov Operator. 
+  \end{compactenum}
+  \end{fsatz}
+  
+\begin{moti}Sei $Q$ gegeben durch $q_{ii}=-i^2$ und $q_{i,i+1}=i^2$ mit $q_{ij}=0$ sonst. Dann beschreibt $Q$ einen \textbf{Geburtsprozess mit Intensität} $(i^2, i\geq0)$, d.h. für alle $i\geq0$ ist die  \textbf{Haltezeit} $S_i$ des zugehörigen Prozesses $(X_t)_{t\geq0}$ exponential verteilt mit Parameter $i^2$, d.h. $\P(S_i>t)=\text e^{-i^2 t}$: Der Prozess startet etwa im Zustand $i=1$ mit Haltezeit $S_1$, wobei $\P(S_1>t)=\text e^{-t}$ und springt anschließend zum Zustand $i=2$. Hier wartet er für eine Haltezeit $S_2$ mit $\P(S_2>t)=\text e^{-4t}$ und springt zum Zustand $i=3$, usw. Dabei gilt für den Erwartungswert $\mathbb E\big[\sum_{i=1}^\infty S_i\big]\leq\sum_{i=1}^\infty \mathbb E[S_i]=\sum_{i=1}^\infty\frac{1}{i^2}< \infty$. $Q$ liefert also keine Information über des Prozess nach der \textbf{Explosionszeit} $T=\sum_{i=1}^\infty S_i<\infty$. Also lassen sich mit einer solchen \textbf{explosiven} Matrix mehrere Prozesse bzw. Halbgruppen assoziieren.
+\end{moti}
+
+  
+\begin{prop} Sei $(P(t))_{t\geq0}$ Halbgruppe einer ZHMK und $(Q,D(Q))$ Generator. Dann gilt:
+\begin{compactenum}
+\item  Für alle $i,j\in\I$ existieren $q_{ii}:=\lim_{t\downarrow 0}\frac{1}{t}[p_{ii}(t)-1]$ und $q_{ij}:=\lim_{t\downarrow 0}\frac{1}{t}p_{ij}(t)$.
+\item  Ist $-q_{ii}< \infty$ und  $\sum_{j\neq i}q_{ij}=-q_{ii}$, dann gilt $e_i\in D(Q)$ mit $Qe_i=(q_{ij})_{j\in\I}$ für alle $i\in\I$.
+\end{compactenum}\end{prop}
+  
+
+\begin{fsatz}Sei $Q$ Kolmogorov Matrix und $D(Q_0)=\textnormal{Lin}(e_i,i\in\I)$ mit $Q_0 e_i:=(q_{ij})_{j\in\I}$ Generator. Dann gibt es stets eine Fortsetzung von $(Q_0, D(Q_0))$, welche eine Halbgruppe von sub-Markov Operatoren erzeugt, die minimal unter allen Halbgruppen von Fortsetzungen ist.
+\end{fsatz}
+
+\begin{fsatz}
+  Sei $Q$ Kolmogorov Matrix. Dann ist die von $(Q_m,D(Q_m))$ erzeugte minimale Halbgruppe $(P_m(t))_{t\geq0}$ genau dann ein Markov Operator, wenn $Q$ nicht explosiv ist.
+\end{fsatz}
+
+\end{document}
